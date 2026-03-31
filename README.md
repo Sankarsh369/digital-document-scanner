@@ -159,29 +159,6 @@ python document_scanner.py photo.jpg scan.jpg --force-full
 - Fastest method
 - Best for high-quality, evenly-lit images
 
-## 📁 Project Structure
-
-```
-digital-document-scanner/
-│
-├── document_scanner.py      # Main script with all functionality
-├── requirements.txt         # Python dependencies
-├── README.md               # This file
-├── PROJECT_REPORT.docx     # Detailed project report
-│
-├── examples/               # Sample input/output images
-│   ├── input/
-│   │   ├── receipt.jpg
-│   │   ├── notes.jpg
-│   │   └── contract.jpg
-│   └── output/
-│       ├── receipt_scanned.jpg
-│       ├── notes_scanned.jpg
-│       └── contract_scanned.jpg
-│
-└── tests/                  # Test scripts (if applicable)
-    └── test_scanner.py
-```
 
 ## 💡 Example Use Cases
 
@@ -260,15 +237,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **Email**: [Sankarshsreekulam@gmail.com]
 - **GitHub**: [@Sankarsh369](https://github.com/Sankarsh369)
 - **Project Link**: https://github.com/Sankarsh369/digital-document-scanner
-
-## 🔮 Future Enhancements
-
-- [ ] Multi-page PDF output support
-- [ ] GUI interface for easier use
-- [ ] Batch processing for multiple documents
-- [ ] OCR integration for text extraction
-- [ ] Mobile app version
-- [ ] Cloud-based processing API
 
 ---
 
