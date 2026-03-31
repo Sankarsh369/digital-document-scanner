@@ -256,10 +256,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Contact
 
-- **Author**: [Your Name]
-- **Email**: [your.email@example.com]
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Project Link**: https://github.com/yourusername/digital-document-scanner
+- **Author**: [S Sankarsha]
+- **Email**: [Sankarshsreekulam@gmail.com]
+- **GitHub**: [@Sankarsh369](https://github.com/Sankarsh369)
+- **Project Link**: https://github.com/Sankarsh369/digital-document-scanner
 
 ## 🔮 Future Enhancements
 
