@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div class="card-panel p-5 text-center mx-auto" style="max-width: 28rem;">
+    <h1 class="display-5">{{ code }}</h1>
+    <p class="text-white-50">{{ message }}</p>
+    <a href="{{ url_for('index') }}" class="btn btn-scan mt-2">Back to scanner</a>
+  </div>
+{% endblock %}

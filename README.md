@@ -6,6 +6,10 @@ Transform messy, shadowed, or skewed photos of documents into clean, high-contra
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.0+-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+## 🚀 Live demo
+
+[https://digital-document-scanner.onrender.com](https://digital-document-scanner.onrender.com) — upload a photo of a document and get back a scanned result in the browser. This runs the exact pipeline below (see [`webapp/`](webapp)) via a small Flask wrapper around `document_scanner.py`. Free-tier hosting spins down after inactivity, so the first request after a while may take 30-60 seconds.
+
 ## 📋 Overview
 
 The **Digital Document Scanner** is a Python-based computer vision application that converts smartphone photos of documents into crisp, professional-looking scans. It automatically detects paper boundaries, corrects perspective distortion, and applies thresholding to produce high-contrast black-and-white outputs suitable for printing, archiving, or sharing.

@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="card-panel p-4 mb-4">
+        <p class="text-white-50 mb-0">
+          Upload a photo of a document (a receipt, a printed page, anything with
+          a rectangular edge) and this will detect its edges, straighten the
+          perspective, and produce a clean black-and-white scan &mdash; the same
+          pipeline as the <code>document_scanner.py</code> CLI tool in this repo,
+          running over the web.
+        </p>
+      </div>
+
+      {% if message %}
+        <div class="alert alert-warning">{{ message }}</div>
+      {% endif %}
+
+      <div class="card-panel p-4 mb-4">
+        <form method="post" action="{{ url_for('scan') }}" enctype="multipart/form-data">
+          <label class="drop-zone d-block mb-3" for="image">
+            <div class="fs-2 mb-2">📷</div>
+            <div>Click to choose a photo, or drag one here</div>
+            <div class="text-white-50 small mt-1">JPG, PNG, WEBP, or BMP &middot; up to 12&nbsp;MB</div>
+            <input type="file" id="image" name="image" accept="image/*" class="d-none" required>
+          </label>
+          <div id="fileNameLabel" class="text-white-50 small mb-3"></div>
+
+          <div class="row g-3 align-items-end">
+            <div class="col-sm-8">
+              <label for="method" class="form-label">Thresholding method</label>
+              <select class="form-select" id="method" name="method">
+                <option value="adaptive" {{ 'selected' if method == 'adaptive' or not method }}>Adaptive &mdash; best for uneven lighting/shadows</option>
+                <option value="otsu" {{ 'selected' if method == 'otsu' }}>Otsu &mdash; fast, good for even lighting</option>
+                <option value="simple" {{ 'selected' if method == 'simple' }}>Simple &mdash; fixed threshold</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <button type="submit" class="btn btn-scan w-100 py-2">Scan document</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      {% if scanned_b64 %}
+        <div class="card-panel p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">Result</h2>
+            {% if detected %}
+              <span class="badge bg-success">Document edges detected</span>
+            {% else %}
+              <span class="badge bg-secondary">No quadrilateral found &mdash; processed full image</span>
+            {% endif %}
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="text-white-50 small mb-1">Original</div>
+              <img class="result-img" src="data:image/png;base64,{{ original_b64 }}" alt="Original photo">
+            </div>
+            <div class="col-md-6">
+              <div class="text-white-50 small mb-1">Scanned</div>
+              <img class="result-img" src="data:image/png;base64,{{ scanned_b64 }}" alt="Scanned result">
+            </div>
+          </div>
+          <a href="{{ url_for('download', result_id=result_id) }}" class="btn btn-scan mt-3">Download scanned PNG</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('image');
+    const label = document.getElementById('fileNameLabel');
+    const dropZone = document.querySelector('.drop-zone');
+    input.addEventListener('change', () => {
+      label.textContent = input.files.length ? `Selected: ${input.files[0].name}` : '';
+    });
+    ['dragover', 'dragleave', 'drop'].forEach(evt => {
+      dropZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropZone.classList.toggle('dragover', evt === 'dragover');
+      });
+    });
+    dropZone.addEventListener('drop', (e) => {
+      if (e.dataTransfer.files.length) {
+        input.files = e.dataTransfer.files;
+        label.textContent = `Selected: ${input.files[0].name}`;
+      }
+    });
+  </script>
+{% endblock %}
